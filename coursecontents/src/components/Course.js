@@ -20,4 +20,5 @@ const Course = ({ course }) => {
   )
 }
 
+// Seperate module
 export default Course;
