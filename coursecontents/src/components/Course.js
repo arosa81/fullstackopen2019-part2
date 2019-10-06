@@ -1,5 +1,4 @@
 import React from 'react';
-import { bold } from 'ansi-colors';
 
 const Header = ({ courseName }) => <h1>{courseName}</h1>
 const PartsContent = ({ parts }) => parts.map(part => <Part key={part.id} part={part} />)
