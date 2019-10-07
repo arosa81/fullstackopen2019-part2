@@ -7,9 +7,14 @@ function App() {
 
   const handleNewName = (event) => setNewName(event.target.value);
 
+  const checkPersonsArrayForExistingName = (name) => persons.some(person => person.name === name)
+
   const addNewName = (event) => {
     event.preventDefault();
-    setPersons(persons.concat({ id: persons.length + 1, name: newName }))
+    checkPersonsArrayForExistingName(newName)
+      ? alert(`${newName} is already added to phonebook`)
+      : setPersons(persons.concat({ id: persons.length + 1, name: newName }))
+
     setNewName('');
   }
 
