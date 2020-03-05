@@ -45,11 +45,15 @@ const App = () => {
       <button onClick={handleNotesToShowToggle}>
         show {showAll ? 'important' : 'all'}
       </button>
+      <br></br>
+      <br></br>
       <input 
         type="text"
         value={newNote} 
         onChange={handleNoteChange}
       />
+      <br></br>
+      <button onClick={addNote}>Add Note</button>
       {notesToShow.map((note) => <Note key={note.id} note={note} />)}
     </div>
   );
