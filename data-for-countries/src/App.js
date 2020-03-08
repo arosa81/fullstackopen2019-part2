@@ -6,17 +6,18 @@ import axios from 'axios';
 const App = () => {
   const [countries, setCountries] = useState([]);
   const [countryName, setCountryName] = useState('');
-  // const [filteredCountryVal, setFilteredCountryVal] = useState('');
   const restCountriesAPI = 'https://restcountries.eu/rest/v2'
 
   useEffect(() => {
     axios.get(`${restCountriesAPI}/all`)
-      .then(response => setCountries(response.data))      
+      .then(response => {
+        response.data.forEach((country, i) => country.id = i+1)
+        setCountries(response.data)
+      })      
   }, [])
 
   const handleCountryNameSearch = (event) => setCountryName(event.target.value);
 
-  // console.log(countries);
   return (
     <div >
       <CountrySearchFrom 
