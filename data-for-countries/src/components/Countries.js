@@ -9,12 +9,11 @@ const Countries = ({ countryName, countries, setCountryName }) => {
           ? country : null)
 
   let numCountries = filteredCountries().length;
-  const filteredCountryObj = filteredCountries()[0];
+  const filteredCountryObj = filteredCountries().length === 1 ? filteredCountries()[0] : null;
   const showCountryDetails = (name) => setCountryName(name);
 
   return (
     <div>
-      {/* {console.log(filteredCountries())} */}
       {numCountries === 0 && (<p></p>)}
       {numCountries === 1 && (
         <CountryDetails filteredCountryObj={filteredCountryObj} />

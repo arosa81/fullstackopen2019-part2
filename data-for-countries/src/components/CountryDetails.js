@@ -1,4 +1,5 @@
 import React from 'react';
+import WeatherDetails from './WeatherDetails'
 
 const CountryDetails = ({ filteredCountryObj }) => {
   return (
@@ -16,6 +17,7 @@ const CountryDetails = ({ filteredCountryObj }) => {
           width="200" height="100"
         />
       </p>
+      <WeatherDetails filteredCountryObj={filteredCountryObj} />
     </div>
   )
 }
