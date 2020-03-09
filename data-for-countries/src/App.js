@@ -27,6 +27,7 @@ const App = () => {
       <Countries
         countryName={countryName}
         countries={countries}
+        setCountryName={setCountryName}
       />
     </div>
   );
