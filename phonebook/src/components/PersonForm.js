@@ -1,4 +1,5 @@
 import React from 'react';
+import personService from '../services/persons';
 
 const PersonForm = (props) => {
   const personObj = {
@@ -14,9 +15,11 @@ const PersonForm = (props) => {
     event.preventDefault();
     checkPersonsArrayForExistingName(props.newName)
       ? alert(`${props.newName} is already added to phonebook`)
-      : props.setPersons(props.persons.concat(personObj))
+      : (personService.createPerson(personObj)
+          .then(returnedPerson => props.setPersons(props.persons.concat(returnedPerson))))
 
     props.setNewName('');
+    props.setNewNumber('');
   }
 
   return (
