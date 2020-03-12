@@ -40,6 +40,7 @@ function App() {
       <Persons
         persons={persons}
         filteredVal={filteredVal}
+        setPersons={setPersons}
       />
     </div>
   );
