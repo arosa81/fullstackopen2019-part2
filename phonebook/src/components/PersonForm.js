@@ -11,12 +11,26 @@ const PersonForm = (props) => {
   const checkPersonsArrayForExistingName = (name) =>
     props.persons.some(person => person.name.trim().toLowerCase() === name.trim().toLowerCase())
 
+  const findSpecificPersonByName = name => props.persons.find(person => person.name.trim().toLowerCase() === name.trim().toLowerCase());
+
+  const updatePhoneNumberOf = person => { return { ...person, number: props.newNumber } }
+  
   const addNewName = (event) => {
     event.preventDefault();
-    checkPersonsArrayForExistingName(props.newName)
-      ? alert(`${props.newName} is already added to phonebook`)
-      : (personService.createPerson(personObj)
-          .then(returnedPerson => props.setPersons(props.persons.concat(returnedPerson))))
+
+    if (checkPersonsArrayForExistingName(props.newName)) {
+      const updateConfirmed = window.confirm(`${props.newName} is already added to phonebook, replace the old number with a new one?`);
+      if (updateConfirmed) {
+        const updatedPerson = updatePhoneNumberOf(findSpecificPersonByName(props.newName));
+        personService.updatePerson(updatedPerson.id, updatedPerson)
+          .then(returnedPerson => props.setPersons(props.persons.map(person => person.id !== updatedPerson.id ? person : returnedPerson)))
+      } else {
+        return null;
+      }
+    } else {
+      personService.createPerson(personObj)
+        .then(returnedPerson => props.setPersons(props.persons.concat(returnedPerson)))
+    }
 
     props.setNewName('');
     props.setNewNumber('');
@@ -34,7 +48,6 @@ const PersonForm = (props) => {
         <button type="submit">add</button>
       </div>
     </form>
-
   )
 }
 

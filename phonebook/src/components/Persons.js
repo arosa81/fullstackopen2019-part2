@@ -3,6 +3,7 @@ import Person from './Person';
 import personService from '../services/persons';
 
 const Persons = ({ persons, filteredVal, setPersons }) => {
+
   const filterPersons = () => filteredVal === '' ? persons
     : persons.filter(person =>
       Object.values(person).join(' ').toLowerCase().indexOf(filteredVal.toLowerCase()) !== -1
@@ -22,7 +23,10 @@ const Persons = ({ persons, filteredVal, setPersons }) => {
   return (
     <div>
       {filterPersons().map(person => 
-        <Person key={person.id} person={person} deletePerson={() => deletePersonOf(person.id)} />)}
+        <Person 
+          key={person.id} 
+          person={person} 
+          deletePerson={() => deletePersonOf(person.id)} />)}
     </div>
   )
 }
