@@ -3,7 +3,7 @@ import personService from '../services/persons';
 
 const PersonForm = (props) => {
   const personObj = {
-    id: props.persons.length + 1,
+    id: props.id + 1,
     name: props.newName,
     number: props.newNumber
   }
@@ -29,7 +29,12 @@ const PersonForm = (props) => {
       }
     } else {
       personService.createPerson(personObj)
-        .then(returnedPerson => props.setPersons(props.persons.concat(returnedPerson)))
+        .then(returnedPerson => {
+          props.setPersons(props.persons.concat(returnedPerson))
+          props.setSuccessMessage(`Added ${personObj.name}`);
+          setTimeout(() => { props.setSuccessMessage(null) }, 5000);
+        })
+
     }
 
     props.setNewName('');
