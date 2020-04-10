@@ -24,6 +24,15 @@ const PersonForm = (props) => {
         const updatedPerson = updatePhoneNumberOf(findSpecificPersonByName(props.newName));
         personService.updatePerson(updatedPerson.id, updatedPerson)
           .then(returnedPerson => props.setPersons(props.persons.map(person => person.id !== updatedPerson.id ? person : returnedPerson)))
+          .catch(error => {
+            props.setMessageType('error');
+            props.setMessage(`Information of ${personObj.name} has already been removed from server`);
+            setTimeout(() => {
+              props.setMessage(null);
+              props.setMessageType(null);
+            }, 5000);
+
+          })
       } else {
         return null;
       }
@@ -31,10 +40,13 @@ const PersonForm = (props) => {
       personService.createPerson(personObj)
         .then(returnedPerson => {
           props.setPersons(props.persons.concat(returnedPerson))
-          props.setSuccessMessage(`Added ${personObj.name}`);
-          setTimeout(() => { props.setSuccessMessage(null) }, 5000);
+          props.setMessageType('success');
+          props.setMessage(`Added ${personObj.name}`);
+          setTimeout(() => { 
+            props.setMessage(null);
+            props.setMessageType(null); 
+          }, 5000);
         })
-
     }
 
     props.setNewName('');

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Persons from './components/Persons';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
-import SuccessMessage from './components/SuccessMessage';
+import Notification from './components/Notification';
 import personService from './services/persons';
 
 function App() {
@@ -10,7 +10,8 @@ function App() {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [filteredVal, setFilteredVal] = useState('');
-  const [successMessage, setSuccessMessage] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [messageType, setMessageType] = useState(null);
 
   //fetches persons from db.json server
   useEffect(() => {
@@ -24,8 +25,9 @@ function App() {
   return (
     <div>
       <h2>Phonebook</h2>
-      <SuccessMessage 
-        successMessage={successMessage}
+      <Notification 
+        message={message}
+        messageType={messageType}
       />
       <Filter
         filteredVal={filteredVal}
@@ -40,7 +42,8 @@ function App() {
         setNewNumber={setNewNumber}
         handleNewName={handleNewName}
         handlenewNumber={handlenewNumber}
-        setSuccessMessage={setSuccessMessage}
+        setMessage={setMessage}
+        setMessageType={setMessageType}
       />
       <h2>Numbers</h2>
       <Persons

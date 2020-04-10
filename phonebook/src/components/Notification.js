@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Notification = ({ message }) => {
+const Notification = ({ messageType, message }) => {
   const error = {
     color: 'red',
     background: 'lightgrey',
@@ -11,13 +11,27 @@ const Notification = ({ message }) => {
     marginBottom: '10px'
   }
 
+  const success = {
+    color: 'green',
+    background: 'lightgrey',
+    fontSize: '20px',
+    borderStyle: 'solid',
+    borderRadius: '5px',
+    padding: '10px',
+    marginBottom: '10px'
+  }
+
+
   if (message === null) {
     return null;
   }
 
   return (
-    <div className={error}>
-      {message}
+    <div>
+      {messageType === 'error'
+        ? <div style={error}>{message}</div> 
+        : <div style={success}>{message}</div>
+      }
     </div>
   )
 }
